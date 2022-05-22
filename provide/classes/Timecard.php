@@ -12,6 +12,7 @@ class Timecard
     }
 
     protected $pdo;
+    public $queryTime = [];
 
     public function InitTables()
     {
@@ -94,14 +95,34 @@ class Timecard
         return true;
     }
 
-    public function SelectTimes($uid)
+    public function SelectTimes($uid, $month = 0)
     {
         try {
+            $mm = strtotime(sprintf("%dmonth", $month));
             $today = ((int) date("d")) - 1;
             $dayCount = (int) date("t");
 
-            $startTime = date("Y-m-d 00:00:00", strtotime(sprintf("-%ddays", $today)));
-            $endTime = date("Y-m-d 00:00:00", strtotime(sprintf("+%ddays", $dayCount - $today)));
+            if ( $month == 0 )
+            {
+                $startTime = date("Y-m-d 00:00:00", strtotime(sprintf("-%ddays", $today)));
+                $endTime = date("Y-m-d 00:00:00", strtotime(sprintf("+%ddays", $dayCount - $today)));
+            } else {
+                $y = date("Y", $mm);
+                $m = date("m", $mm);
+                $ly = $y;
+                $lm = $m + 1;
+                if ($lm > 12)
+                {
+                    $ly += 1;
+                    $lm = 1;
+                }
+
+                $startTime = date("Y-m-d 00:00:00", strtotime(sprintf("%d-%d-01", $y, $m)));
+                $endTime = date("Y-m-d 00:00:00", strtotime(sprintf("%d-%d-01", $ly, $lm)));
+            }
+
+
+            $this->queryTime = [$startTime, $endTime];
 
             $smt = $this->pdo->prepare("SELECT * FROM cards WHERE startTime > ? AND endTime < ? AND uid=?;");
             $smt->execute([

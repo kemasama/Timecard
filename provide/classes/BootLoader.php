@@ -32,8 +32,15 @@ class BootLoader
             $isAdmin = false;
             $loginUser = [];
             $works = [];
+            $month = 0;
 
             $page = filter_input(INPUT_GET, "p") ?? "home";
+            $tmonth = filter_input(INPUT_GET, "m");
+
+            if ($result = filter_var($tmonth, FILTER_VALIDATE_INT))
+            {
+                $month = $result;
+            }
 
             if ($user->hasLogout())
             {
@@ -109,7 +116,7 @@ class BootLoader
             }
 
             $result = $this->cards->hasCard($loginUser["id"], $isAdmin);
-            $works = $this->cards->SelectTimes($loginUser["id"]);
+            $works = $this->cards->SelectTimes($loginUser["id"], $month);
             $lastCard = $this->cards->getLastInsert($loginUser["id"]);
 
             $users = $this->cards->getUsers();
@@ -118,6 +125,7 @@ class BootLoader
                 "users" => $users,
                 "user" => $loginUser,
                 "works" => $works,
+                "queryTime" => $this->cards->queryTime,
                 "canonical" => $this->config["canonical"],
                 "config" => $this->config,
                 "addCard" => $result,

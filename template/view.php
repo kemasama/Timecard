@@ -118,12 +118,37 @@
         <hr />
 
         <?php if($args["logged"]): ?>
+
+        <div class="container-fluid row">
+            <div class="col-md-4 offset-md-5">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="?m=-2">先々月</a></li>
+                        <li class="page-item"><a class="page-link" href="?m=-1">先月</a></li>
+                        <li class="page-item"><a class="page-link" href="?m=0">今月</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
         <div class="container mt-3">
             <?php if(empty($args["works"]) && !$args["lastCard"]): ?>
             <p class="text-danger">タイムカードは登録されていません。</p>
             <?php else: ?>
             <?php $hours = 0; $minutes = 0; ?>
             <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <tr>
+                        <th>開始日</th>
+                        <th>終了日</th>
+                    </tr>
+                    <tr>
+                        <th><?php echo $args["queryTime"][0]; ?></th>
+                        <th><?php echo $args["queryTime"][1]; ?></th>
+                    </tr>
+                </table>
+            </div>
+            <div class="table-responsive mt-1">
                 <table class="table table-hover table-bordered">
                     <tr>
                         <th>始業</th>
