@@ -60,5 +60,5 @@ provide フォルダ内のファイルを修正します。
 
 Bootstrap
 
-(https://getbootstrap.jp/)[https://getbootstrap.jp/]
+[https://getbootstrap.jp/](https://getbootstrap.jp/)
 
