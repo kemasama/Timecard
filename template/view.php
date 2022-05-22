@@ -1,3 +1,4 @@
+<!-- Version <?php echo $args["config"]["version"]; ?> -->
 <!DOCTYPE html>
 <html lang="ja">
     <head>
@@ -9,7 +10,6 @@
         <?php foreach ($args["config"]["heads"] as $key => $val): ?>
             <?php echo $val; ?>
         <?php endforeach; ?>
-        <!-- Version 1.0.0 -->
     </head>
     <body>
         <div class="container">

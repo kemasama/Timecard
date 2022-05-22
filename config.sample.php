@@ -1,6 +1,7 @@
 <?php
 
 return [
+    "version" => "1.0.1",
     "mysql" => [
         "hostname" => "localhost",
         "dbname" => "timecard",
@@ -8,7 +9,7 @@ return [
         "password" => ""
     ],
 
-    "admin-password" => "admin",
     "canonical" => "http://localhost/timecard/",
     "heads" => [],
+    "admin_users" => [],
 ];
