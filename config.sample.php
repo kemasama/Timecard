@@ -8,5 +8,7 @@ return [
         "password" => ""
     ],
 
+    "admin-password" => "admin",
     "canonical" => "http://localhost/timecard/",
+    "heads" => [],
 ];

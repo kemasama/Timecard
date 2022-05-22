@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class IDB {
     public function __construct() {
