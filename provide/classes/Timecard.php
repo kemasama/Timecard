@@ -124,7 +124,7 @@ class Timecard
 
             $this->queryTime = [$startTime, $endTime];
 
-            $smt = $this->pdo->prepare("SELECT * FROM cards WHERE startTime > ? AND endTime < ? AND uid=?;");
+            $smt = $this->pdo->prepare("SELECT * FROM cards WHERE startTime > ? AND startTime < ? AND uid=?;");
             $smt->execute([
                 $startTime,
                 $endTime,
